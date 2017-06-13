@@ -190,6 +190,9 @@
         UIVisualEffectView *vibrancyView = [[UIVisualEffectView alloc] initWithEffect:vibrancy];
         vibrancyView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         
+        UIVisualEffectView *container = [[UIVisualEffectView alloc] initWithEffect:blur];
+        [container.contentView addSubview:vibrancyView];
+
         if(!self.disableBlurEffectsForContentView) {
             [vibrancyView.contentView addSubview:self.contentView];
         }
@@ -207,11 +210,8 @@
         }
         
         for(RMAction *anAction in self.doneActions) {
-            [vibrancyView.contentView addSubview:anAction.view];
+            [[(anAction.style == RMActionStyleDestructive) ? container : vibrancyView contentView]addSubview:anAction.view];
         }
-        
-        UIVisualEffectView *container = [[UIVisualEffectView alloc] initWithEffect:blur];
-        [container.contentView addSubview:vibrancyView];
         
         self.topContainer = container;
         

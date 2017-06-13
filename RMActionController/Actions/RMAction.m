@@ -112,9 +112,6 @@
 
 - (UIView *)loadView {
     UIButtonType buttonType = UIButtonTypeCustom;
-    if(self.controller.disableBlurEffects) {
-        buttonType = UIButtonTypeSystem;
-    }
     
     UIButton *actionButton = [UIButton buttonWithType:buttonType];
     [actionButton addTarget:self action:@selector(actionTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -126,14 +123,14 @@
     }
     
     if(!self.controller.disableBlurEffects) {
-        [actionButton setBackgroundImage:[self imageWithColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]] forState:UIControlStateHighlighted];
+//        [actionButton setBackgroundImage:[self imageWithColor:[[UIColor whiteColor] colorWithAlphaComponent:0.3]] forState:UIControlStateHighlighted];
     } else {
         switch (self.controller.style) {
             case RMActionControllerStyleWhite:
-                [actionButton setBackgroundImage:[self imageWithColor:[UIColor colorWithWhite:230./255. alpha:1]] forState:UIControlStateHighlighted];
+//                [actionButton setBackgroundImage:[self imageWithColor:[UIColor colorWithWhite:230./255. alpha:1]] forState:UIControlStateHighlighted];
                 break;
             case RMActionControllerStyleBlack:
-                [actionButton setBackgroundImage:[self imageWithColor:[UIColor colorWithWhite:0.2 alpha:1]] forState:UIControlStateHighlighted];
+//                [actionButton setBackgroundImage:[self imageWithColor:[UIColor colorWithWhite:0.2 alpha:1]] forState:UIControlStateHighlighted];
                 break;
         }
     }
@@ -147,7 +144,7 @@
     [actionButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[actionButton(height)]" options:0 metrics:@{@"height": @([NSProcessInfo runningAtLeastiOS9] ? 55 : 44)} views:NSDictionaryOfVariableBindings(actionButton)]];
     
     if(self.style == RMActionStyleDestructive) {
-        [actionButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [actionButton setTitleColor:[UIColor colorWithRed:245.f/256.f green:60.f/256.f blue:35.f/256.f alpha:1.f] forState:UIControlStateNormal];
     }
     
     return actionButton;
